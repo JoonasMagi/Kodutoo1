@@ -1,75 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Player</title>
+    <meta charset="UTF-8">  <!-- Character encoding for the document -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Responsive design -->
+    <title>Music Player</title>  <!-- Title of the webpage -->
 </head>
 <body>
-<p>Online Music Player</p>
-<h1>The Best Music For You</h1>
-<label for="trackSelect">Choose your mood:</label>
-<select id="trackSelect">
-    <option value="devorah.mp3">Energetic</option>
-    <option value="getlucky.mp3">Happy</option>
-    <option value="moby.mp3">Sad</option>
-    <option value="reflect.mp3">Peaceful</option>
-    <option value="sweetdreams.mp3">Nostalgic</option>
+<p>Online Music Player</p>  <!-- Heading for the music player -->
+<h1>The Best Music For You</h1>  <!-- Main title of the webpage -->
+<label for="trackSelect">Choose your mood:</label>  <!-- Label for the track selection dropdown -->
+<select id="trackSelect">  <!-- Dropdown for selecting tracks -->
+    <option value="devorah.mp3">Energetic</option>  <!-- Option for energetic track -->
+    <option value="getlucky.mp3">Happy</option>  <!-- Option for happy track -->
+    <option value="moby.mp3">Sad</option>  <!-- Option for sad track -->
+    <option value="reflect.mp3">Peaceful</option>  <!-- Option for peaceful track -->
+    <option value="sweetdreams.mp3">Nostalgic</option>  <!-- Option for nostalgic track -->
 </select>
 <br><br>
-<audio id="audioPlayer" controls>
-    <source id="audioSource" src="devorah.mp3" type="audio/mp3">
+<audio id="audioPlayer" controls>  <!-- Audio player with controls -->
+    <source id="audioSource" src="devorah.mp3" type="audio/mp3">  <!-- Default audio source -->
 </audio>
 <br><br>
-<button id="playButton">Play</button>
-<button id="pauseButton">Pause</button>
-<button id="stopButton">Stop</button>
+<button id="playButton">Play</button>  <!-- Button to play the audio -->
+<button id="pauseButton">Pause</button>  <!-- Button to pause the audio -->
+<button id="stopButton">Stop</button>  <!-- Button to stop the audio -->
 <br><br>
-<div id="trackInfo">
-    Now playing: <span id="currentTrack">Energetic</span>
+<div id="trackInfo">  <!-- Div to display current track info -->
+    Now playing: <span id="currentTrack">Energetic</span>  <!-- Display current track name -->
 </div>
 <script>
-    const audioPlayer = document.getElementById('audioPlayer');
-    const audioSource = document.getElementById('audioSource');
-    const trackSelect = document.getElementById('trackSelect');
-    const playButton = document.getElementById('playButton');
-    const pauseButton = document.getElementById('pauseButton');
-    const stopButton = document.getElementById('stopButton');
-    const currentTrack = document.getElementById('currentTrack');
+    // Get references to HTML elements
+    const audioPlayer = document.getElementById('audioPlayer');  // Audio player element
+    const audioSource = document.getElementById('audioSource');  // Audio source element
+    const trackSelect = document.getElementById('trackSelect');  // Track selection dropdown
+    const playButton = document.getElementById('playButton');  // Play button
+    const pauseButton = document.getElementById('pauseButton');  // Pause button
+    const stopButton = document.getElementById('stopButton');  // Stop button
+    const currentTrack = document.getElementById('currentTrack');  // Element displaying current track
 
-    let isPlaying = false;
-    let isPaused = false;
+    // State variables to track playback status
+    let isPlaying = false;  // Indicates if audio is currently playing
+    let isPaused = false;   // Indicates if audio is currently paused
 
+    // Event listener for track selection change
     trackSelect.addEventListener('change', () => {
-        audioSource.src = trackSelect.value;
-        audioPlayer.load();
-        currentTrack.textContent = trackSelect.options[trackSelect.selectedIndex].text;  // Обновляем отображаемое название трека
-        isPlaying = false;
-        isPaused = false;
+        audioSource.src = trackSelect.value;  // Update audio source based on selection
+        audioPlayer.load();  // Reload the audio player with the new source
+        currentTrack.textContent = trackSelect.options[trackSelect.selectedIndex].text;  // Update displayed track name
+        isPlaying = false;  // Reset play status
+        isPaused = false;   // Reset pause status
     });
 
+    // Event listener for play button click
     playButton.addEventListener('click', () => {
-        if (!isPlaying) {
-            audioPlayer.play();
-            isPlaying = true;
-            isPaused = false;
+        if (!isPlaying) {  // Check if audio is not already playing
+            audioPlayer.play();  // Play the audio
+            isPlaying = true;  // Update play status
+            isPaused = false;  // Reset pause status
         }
     });
 
+    // Event listener for pause button click
     pauseButton.addEventListener('click', () => {
-        if (isPlaying && !isPaused) {
-            audioPlayer.pause();
-            isPaused = true;
-            isPlaying = false;
+        if (isPlaying && !isPaused) {  // Check if audio is playing and not already paused
+            audioPlayer.pause();  // Pause the audio
+            isPaused = true;  // Update pause status
+            isPlaying = false;  // Reset play status
         }
     });
 
+    // Event listener for stop button click
     stopButton.addEventListener('click', () => {
-        if (isPlaying || isPaused) {
-            audioPlayer.pause();
-            audioPlayer.currentTime = 0;
-            isPlaying = false;
-            isPaused = false;
+        if (isPlaying || isPaused) {  // Check if audio is playing or paused
+            audioPlayer.pause();  // Pause the audio
+            audioPlayer.currentTime = 0;  // Reset playback to start
+            isPlaying = false;  // Reset play status
+            isPaused = false;   // Reset pause status
         }
     });
 </script>
